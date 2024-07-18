@@ -60,3 +60,46 @@ ws.addChangeListener((e) => {
   }
   runCode();
 });
+
+function loadFastaFile(file) {
+  fetch(file)
+    .then(response => response.text())
+    .then(text => {
+      window.sequence = text.split('\n').slice(1).join(''); // Skip the header line
+    });
+}
+
+function plotNucleotideFrequency() {
+  if (!window.sequence) {
+    alert('No sequence loaded. Please load a FASTA file first.');
+    return;
+  }
+  
+  const nucleotideCounts = {};
+  for (let nucleotide of window.sequence) {
+    if (!nucleotideCounts[nucleotide]) {
+      nucleotideCounts[nucleotide] = 0;
+    }
+    nucleotideCounts[nucleotide]++;
+  }
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(nucleotideCounts),
+      datasets: [{
+        label: 'Nucleotide Frequency',
+        data: Object.values(nucleotideCounts),
+        backgroundColor: ['blue', 'green', 'red', 'yellow'],
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}

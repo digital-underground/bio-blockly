@@ -28,3 +28,14 @@ forBlock['add_text'] = function (block, generator) {
   const code = `${addText}(${text});\n`;
   return code;
 };
+
+forBlock['load_fasta'] = function(block) {
+  var file = block.getFieldValue('FILE');
+  var code = `loadFastaFile('${file}');\n`;
+  return code;
+};
+
+forBlock['plot_bar_chart'] = function(block) {
+  var code = 'plotNucleotideFrequency();\n';
+  return code;
+};

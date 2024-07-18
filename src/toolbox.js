@@ -16,6 +16,21 @@ export const toolbox = {
   kind: 'categoryToolbox',
   contents: [
     {
+      "kind": "category",
+      "name": "Custom Blocks",
+      "colour": "#5C81A6",
+      "contents": [
+        {
+          "kind": "block",
+          "type": "load_fasta"
+        },
+        {
+          "kind": "block",
+          "type": "plot_bar_chart"
+        }
+      ]
+    },
+    {
       kind: 'category',
       name: 'Logic',
       categorystyle: 'logic_category',
